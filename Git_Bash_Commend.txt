@@ -1,0 +1,130 @@
+Basic 디렉토리 이동 #######################################
+1) 홈 디렉토리로 이동
+$ cd ~
+
+2) 새 디렉토리에 디렉토리명을 생성
+$ mkdir [디렉토리명]
+
+3) [디렉토리명]로 이동
+$ cd [디렉토리명]
+
+4) 부모 디렉토리로 이동
+$ cd ..
+
+5) 현재 경로를 출력 // print working directory
+$ pwd
+
+6) 디렉토리의 내용을 출력
+$ ls
+
+7) 디렉토리의 폴더 상세 정보까지 출력
+$ ls -l
+
+8) 디렉토리의 숨김 파일과 디렉토리까지 출력
+$ ls -a
+tip: 옵션은 합쳐서 ls -al 처럼 사용이 가능하다.
+
+9) 파일이 있는 디렉토리를 내용물과 함께 삭제
+$ rm -r [디렉토리명]
+
+10) vi 편집기로 [파일명.확장자명] 파일을 작성
+$ vim [파일명.확장자명]
+
+11) 터미널 창의 내용을 삭제
+$ clear
+
+12) 터미널 창을 종료
+$ exit
+
+########################################################
+
+1. 현재 위치에서 지역 저장소 생성 #############################
+$ git init
+
+2. 깃 환경 설정 ############################################
+사용자 이름, 이메일 지정
+$ git config --global user.name "[사용자명]"
+$ git config --global user.email "[사용자이메일명]"
+
+깃 상태 확인
+$ git status
+
+3. commit 명령어 ##########################################
+해당 파일을 스테이지에 올림
+$ git add [파일명.확장자명]
+
+커밋 메시지[메시지명]을 붙여 커밋
+$ git commit -m "[메시지명]"
+
+위의 과정 스테이징과 커밋을 동시에 진행.
+$ git commit -a -m "[메시지명]"
+
+커밋 내역 확인
+$ git log
+$ git log --pretty=oneline 			# 한줄로 표기
+
+특정 커밋 내역 확인
+$ git show [커밋 id]
+
+최근 버전과 작업 폴더의 수정 파일 사이의 차이를 출력
+$ git diff
+$ git diff [이전커밋 id] [이후커밋 id]
+
+지정한 커밋 해시로 이동
+$ git checkout [커밋 해시]
+
+가장 최근 커밋을 취소
+$ git reset HEAD^
+$ git reset HEAD~n
+
+지정한 커밋 해시로 이동하고 커밋을 취소
+$ git reset [커밋 해시]
+▷3가지 옵션
+$ git reset --soft [커밋ID]  # head 만 바뀜
+$ git reset --mixed [커밋ID] # staging 도 그 때로 바뀜
+$ git reset --hard [커밋ID] # working디렉토리/staging 모두 그 때로 바꿈 
+
+지정한 커밋 해시의 변경 이력을 취소
+$ git revert [커밋 해시]
+
+커밋 수정하는 법
+파일 수정 한 뒤
+$ git add . 
+$ git commit --amend  : 최신 커밋 수정
+
+4. 브랜치 명령어 ##########################################
+1) 새로운 브랜치 [브랜치명을 생성]
+$ git branch [브랜치명]
+
+브랜치 조회하기
+$ git branch
+
+2) [브랜치명] 으로 체크아웃(이동)
+$ git checkout [브랜치명]
+$ git checkout -b [브랜치명]  # 브랜치만들고 바로 이동
+
+브랜치 삭제
+$ git branch -d [브랜치명]
+
+3) 커밋 로그에서 한 줄에 한 커밋씩 출력
+$ git log --oneline
+
+4) 수정한 전체 파일을 스테이지에 올림
+$ git add .
+
+5) 커밋 로그에 각 브랜치의 커밋을 그래프로 표시 
+$ git log --branches --grahp
+
+6) [브랜치명]을 master 브랜치와 병합
+$ git merge [브랜치명]
+$ git merge [브랜치명] --edit		// 병합 후 바로 vi 편집기가 
+$ git merge [브랜치명] --no-edit
+
+7) merge 취소하기
+$ git merge --abort
+
+5. github 원격저장소 ########################################
+1) 원격 저장소에 연결
+$ git remote add origin [github 레포리지 주소]
+$ git remote add origin [branch 이름]
+

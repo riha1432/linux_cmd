@@ -1,0 +1,3 @@
+pip freeze = 설치된 패키지 보기
+pip freeze > 파일 명   =  설치된 패키지 보내기
+pip uninstall -r 파일 명 -y

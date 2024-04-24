@@ -1,0 +1,195 @@
+sudo apt-get install git
+
+mkdir git_test 디렉토리 생성
+cd git_test 디렉토리 이동
+
+git config --global user.name (github 이름)
+git config --global user.email (github 이메일)
+git config --global --list
+
+git init
+git remote add origin (github 저장소 주소)
+
+git add .
+git commit -m "first commit"
+git push origin master
+(git push origin +main)
+(git push --set-upstream origin +main 
+-> 
+git push )
+
+git branch -m master main
+git fetch origin
+git branch -u origin/main main
+git remote set-head origin -a
+
+강제로 덮어쓰기
+git fetch --all
+git reset --hard origin/main
+git pull
+
+// git add : 저장소에 올릴 파일을 정하는 것 (.의 의미는 전체 파일)
+// git commit : 저장소에 올리는데 설명을 붙여주는 것 (귀찮지만 꼭 해야한다)
+// git push : 이 명령어를 통해 실제로 업로드
+
+// git clone repo_url . : 저장소에 있는 파일을 현재 경로로 가져온다. 리눅스 명령어와 비교해보면 cp -rf ../source_dir/* .와 같은 동작이 수행된다.\
+// git clone repo_url : 저장소 폴더 통째로 현재 경로로 가져온다. 즉, 저장소 이름의 폴더명이 현재 경로에 생성된다. 리눅스 명령어와 비교해보면 cp -rf ../source_dir .와 같은 동작이 수행된다.
+
+git pull
+//작업 중인 경로에 가서 위 명령어를 치면 .git 폴더의 내용을 기반으로 저장소와 내 로컬 (리눅스) 간의 연결 정보를 파악하여 저장소에 있는 최신 코드로 내 로컬 파일들을 업데이트한다.
+
+
+# 설치
+apt-get install git
+ 
+ 
+# 전역 설정 정보 조회
+git config --global --list
+ 
+ 
+# 저장소별 설정 정보 조회
+git config --list
+ 
+ 
+# 설정 - 깃허브 계정 정보를 입력한다.
+git config --global user.name "tjqjaejr9741"
+git config --global user.email "tjqjaejr9741@gmail.com"
+ 
+ 
+# 저장소 초기화
+git init
+ 
+ 
+# 저장소 복제
+git clone https://github.com/LukeHan1128/samples.git
+ 
+ 
+# 특정 브랜치만 복제
+git clone -b branch_name  https://github.com/LukeHan1128/samples.git
+ 
+ 
+# 브랜치 목록 보기
+git branch
+git branch -m main
+ 
+# 원격 브랜치 목록 보기
+git branch -r
+ 
+ 
+#모든 브랜치 목록 보기
+git branch -a
+ 
+ 
+# 변경된 파일 추가 (커밋전 필수)
+git add <file>
+ 
+ 
+# 전체 파일 추가
+git add -A
+ 
+# add 취소
+git reset <file>
+ 
+ 
+# add 전체 취소
+git reset
+
+# 커밋
+git commit -m 'message'
+
+ 
+# push - 업로드
+git push
+git push origin main
+git push origin --delete master 삭제 
+
+git checkout main 브랜치 전환
+
+# pull
+git pull
+
+git status 
+버전 관리 대상 추적
+
+git config credential.helper store 	= 정보 저장
+git config credential.helper 'cache --timeout 600'
+
+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 hub
+glpat-NUNTLsRVUdnCY7e9bLa- lab
+
+alias vi=nvim
+
+# GitHub
+
+#function Gchek(){
+#	head=$(git rev-parse --abbrev-ref HEAD)
+#	if [ $1 != $head ];then
+#		git checkout $1
+#		echo $1
+#	fi
+#}
+
+revert=0
+
+function gpush(){
+	if [ $revert == 0 ];then
+		gfetch main
+		git add .&&
+		git commit -m "$1"
+	fi
+
+	if [ $2 ];then
+		git push origin $2
+	else
+		git push origin main
+		revert=0
+	fi
+}
+
+function greset(){
+	git reset --soft HEAD~$1
+}
+
+function grevert(){
+	git revert HEAD~$1
+	revert=1
+}
+
+function gfetch(){
+	git fetch origin &&
+	git merge origin/$1
+}
+
+function glog(){
+	#git log -p -$1
+	if [ $1 ];then
+		git log --pretty=format:"%h - %an, %ar, %cn, %s" -$1
+	else
+		git log --pretty=format:"%h - %an, %ar, %cn, %s"
+	fi
+#	%H	커밋 해시
+#	%h	단축 커밋 해시
+#	%T	트리 해시
+#	%t	단축 트리 해시
+#	%P	부모 해시
+#	%p	단축 부모 해시
+#	%an	저자이름
+#	%ae	저자 메일
+#	%ad	저자 시간(-date 옵션)
+#	%ar	저자 상대 시간(ex: 5 days ago)
+#	%cn	committer 이름(커밋한 사람)
+#	%ce	committer 메일(커밋한 사람)
+#	%cd	committer 시간
+#	%cr	committer 상대 시간(ex: 5 days ago)
+#	%s	요약
+}
+
+function cache(){
+	git config credential.helper store &&
+	git config credential.helper 'store --file ~/.my-credentials'
+	#git config credential.helper 'cache --timeout 1800'
+}
+
+function dj(){
+	django-admin startproject $1
+}

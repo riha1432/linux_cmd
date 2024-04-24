@@ -1,0 +1,142 @@
+git_cli_install
+	windows
+	https://cli.github.com/
+	
+or
+	
+	scoop bucket add github-gh https://github.com/cli/scoop-gh.git
+	scoop install gh
+	
+	linux
+	$ curl -fsSL <https://cli.github.com/packages/githubcli-archive-keyring.gpg> | sudo dd of=/usr/share/keyrings/githubcli-archive-keyring.gpg
+	$ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/githubcli-archive-keyring.gpg] <https://cli.github.com/packages> stable main" | sudo tee /etc/apt/sources.list.d/github-cli.list > /dev/null
+	// 위에꺼 안해도 되긴했음 ㅇㅇ
+	$ sudo apt update
+	$ sudo apt install gh
+
+--------------------------------------------------------------------------------
+step-up 4 auth
+install conf
+$ gh
+
+get_login
+$ gh auth login
+
+--------------------------------------------------------------------------------
+gh_document : https://cli.github.com/manual/gh
+--------------------------------------------------------------------------------
+gh_repo_cmd
+
+# repo_clone
+$ gh repo clone 사용자이름/리퍼지토리이름
+ex) $ gh repo clone FsRoot/TestGit4Train
+
+# repo_create				옵션
+$ gh repo create "프로젝트명"		-y, --confirm		# 확인과정 패스
+						-d, --description "설명"	# 설명작성
+						--enable-issues	# 이슈 활성화
+						--enalbe-wiki	# wiki 활성화
+						-h, --homepag "홈페이지명"	#리포지토리 홈 페이지 url
+
+# 클론및 git계정 리퍼지토리 자동생성 [퍼블릭 고정]	옵션
+$ gh repo fork 사용자이름/리퍼지토리이름			--clone=true or false
+									ex) --clone=false
+									fork를 통해 리퍼지토리 복제만 진행
+									ex) --remote=false
+									fork를 통하여 clone만 진행
+
+# repo_view								옵션
+$ gh repo view 사용자이름/리퍼지토리이름			-b, --branch "브랜치명"	#브랜치 지정
+									-w, --web	#브라우저 열기
+
+--------------------------------------------------------------------------------
+gh_gist_manage_cmd
+만들어진 파일을 gist로 실행할때 사용
+
+# gist_create					옵션
+$ gh gist create 파일이름.확장자	-d, --desc "설명"
+						-f, --filename "파일명"
+						-p, --public	#공개설정
+
+# gist_edit
+$ gh gist edit gistid or gisturl / or -f,--filename "파일이름" 	# /이후꺼만 써도 돌아감
+
+# gist_list		옵션
+$ gh gist list		-L, --limit int	 숫자		#가져올 gist 최대수
+			--public, --secret		#공개설정 (실제 사용 미정)
+
+# gist_view
+$ gh gist view gistid or gisturl / or -f,--filename "파일이름"	# /이후꺼만 써도 돌아감
+
+--------------------------------------------------------------------------------
+gh_issue_manage_cmd
+
+# issue_creat		옵션
+$ gh issue create 	-a, --assignee "사용자이름"
+			-b, --body "내용"
+			-l, --label "라벨"		
+# 라벨종류 :bug, documentation, duplicate, enhancement, good first issue
+, help wanted, invalid, question, wontfix,<커스텀 라벨>
+
+			-m, --milestone "마일스톤명" #일정 같은것 따로 생성하고 지정
+			-p, --project "프로젝트명" #프로젝트에 추가
+			-t, --title "타이틀명"
+			-w, --web #브라우저로 열기
+
+# issue_status
+$ gh issue status 	# 해당 리퍼지토리 이슈들 나열
+$ gh issue status --repo 사용자이름/리퍼지토리이름	#해당 프로젝트에 이슈 없으면 빈칸만뜸, 단 이슈기능을 꺼놓으면 꺼놨다는 명령어 출력
+ex) gh issue status --repo FsRoot/TestGit4Train
+
+# issue_list		옵션
+$ gh issue list	-a, --assignee	#assignee로 필터링
+			-A, --author		#author로 필터링
+			-l, --label		#label로 필터링
+			-L, --limit		#limit로 필터링
+			-m, --milestone	#milestone로 필터링
+			-s, --status		#status로 필터링
+
+# issue_view		보기			옵션
+$ gh issue view 이슈번호 or url		-w, --web	#브라우저 열기
+
+# issue_close	이슈마감
+$ gh issue close 이슈번호 or url
+
+# issue_reopen	마감된 이슈 다시 열기
+$ gh issue reopen 이슈번호 or url
+
+--------------------------------------------------------------------------------
+gh_pull_request_manage_cmd
+pull_requeset 참고 - https://wayhome25.github.io/git/2017/07/08/git-first-pull-request-story/
+
+# pull_request_checkout						옵션
+$ gh pr checkout <number> or <url> or <branch>	--recurse-submodules	#모든 active submodules 업데이트
+
+# pull_request_checks
+$ gh pr checks checks <number> or <url> or <branch>
+
+# pull_request_close					옵션
+$ gh pr close <number> or <url> or <branch>	-d, --delete-brach : close 이후 로컬/ 리모트 브런치 삭제
+
+# pull_request_create
+$ gh pr create 사용자이름/리퍼지토리이름
+
+# pull_request_list
+$ gh pr list		#pull_request리스트 확인
+
+/////// 요약할 곳
+https://meaownworld.tistory.com/entry/Github-cli-%EC%84%A4%EC%B9%98-%EC%82%AC%EC%9A%A9%EB%B2%95
+
+--------------------------------------------------------------------------------
+gh_release_manage_cmd
+
+# release_create			옵션
+$ gh release create "태그"	-d, --draft 				# 임시로 릴리즈 저장
+					-n, --notes "노트작성"		# 노트작성
+					-F, --notes-file ""			# 파일에서 릴리즈 읽기
+					-p, --prerelease			# release를 prerelease로 마크
+					--target "브랜치"			#타겟 프랜치 지정
+					-t, --title "타이틀"			#타이틀 지정
+
+# releease_delete			옵션
+$ gh release delete "태그"	-y, -yes				#확인작업 생략

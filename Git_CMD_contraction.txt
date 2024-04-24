@@ -1,0 +1,16 @@
+초기시작
+git init
+git remote add origin 리퍼지토리 주소
+git check out -b main
+git pull origin main
+-----------------------------------------------------------------------
+git pull origin main # 다른사람과 같이 사용하여 파일 내려받을때 
+git status #수정내역 알려줌
+
+반복
+git add .
+git commit -m "메시지 ㅅㅂㅎㅈㅂㅁㄹㅈㅎㄹㄷㄹ"
+git push origin main
+
+
+큰명령어
