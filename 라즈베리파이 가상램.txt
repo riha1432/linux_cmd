@@ -1,0 +1,5 @@
+sudo service dphys-swapfile stop
+
+sudo nvim /etc/dphys-swapfile
+
+sudo service dphys-swapfile start
