@@ -1,0 +1,22 @@
+sudo apt-get update
+sudo apt-get install make build-essential libssl-dev zlib1g-dev \ libbz2-dev libreadline-dev libsqlite3-dev wget curl llvm \ libncursesw5-dev xz-utils tk-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev
+
+
+curl https://pyenv.run | bash
+exec $SHELL
+export PATH="$HOME/.pyenv/bin:$PATH"
+eval "$(pyenv init --path)"
+eval "$(pyenv virtualenv-init -)"
+
+sudo apt-get update
+sudo apt-get install --yes libssl-dev zlib1g-dev libbz2-dev libreadline-dev libsqlite3-dev llvm libncurses5-dev libncursesw5-dev xz-utils tk-dev libgdbm-dev lzma lzma-dev tcl-dev libxml2-dev libxmlsec1-dev libffi-dev liblzma-dev wget make openssl
+
+pyenv --version
+
+version	현재 사용 중인 Python 의 버전 출력
+versions	현재 사용 가능한 (설치된) Python 들의 버전 출력
+install	새로운 버전의 파이썬 설치
+--list 를 인자로 전달하면 설치 가능한 버전 목록을 출력
+global	선택한 버전의 Python 을 전역 버전으로 변경
+local	선택한 버전의 Python 을 현재 디렉토리 및 그 하위 디렉토리의 버전으로 변경
+shell	선택한 버전의 Python 을 현재 쉘의 버전으로 변경
