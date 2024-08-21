@@ -52,8 +52,8 @@ git config --list
  
  
 # 설정 - 깃허브 계정 정보를 입력한다.
-git config --global user.name "tjqjaejr9741"
-git config --global user.email "tjqjaejr9741@gmail.com"
+git config --global user.name ""
+git config --global user.email ""
  
  
 # 저장소 초기화
@@ -114,8 +114,7 @@ git status
 git config credential.helper store 	= 정보 저장
 git config credential.helper 'cache --timeout 600'
 
-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 hub
-glpat-NUNTLsRVUdnCY7e9bLa- lab
+
 
 alias vi=nvim
 
@@ -185,9 +184,9 @@ function glog(){
 }
 
 function cache(){
-	git config credential.helper store &&
-	git config credential.helper 'store --file ~/.my-credentials'
-	#git config credential.helper 'cache --timeout 1800'
+	git config --global credential.helper store &&
+	git config --global credential.helper 'store --file ~/.my-credentials'
+	#git config --global credential.helper 'cache --timeout 1800'
 }
 
 function dj(){
